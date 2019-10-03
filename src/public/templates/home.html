@@ -1,0 +1,24 @@
+<div class="row" id="home-root">
+  <div class="offset-md-2 col-md-8 col-sm-12 off">
+    <div class="card">
+      <div class="card-body">
+        <form ng-submit="submit(user)">
+          <div class="form-group">
+            <label for="username">GitHub username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Enter username"
+              ng-model="user.username"
+            >
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >Find</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
