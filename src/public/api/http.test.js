@@ -16,4 +16,12 @@ describe('http', function() {
     expect(_fetch).toHaveBeenCalledWith('andrew');
     expect(response).toEqual('le');
   });
+
+  test('post', async function() {
+    expect.assertions(1);
+    const res = { json: jest.fn().mockReturnValueOnce('le') };
+    _fetch.mockReturnValueOnce(Promise.resolve(res));
+    const response = await http.post('andrew');
+    expect(response).toEqual('le');
+  });
 });

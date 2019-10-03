@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel src/public/index.html",
     "pretest": "eslint src",
-    "test": "jest",
+    "test": "jest --coverage",
     "fix": "eslint --fix src"
   },
   "files": [
@@ -61,6 +61,7 @@
       "browser": true
     },
     "rules": {
+      "new-cap": "off",
       "capitalized-comments": "off",
       "prettier/prettier": [
         "error",
