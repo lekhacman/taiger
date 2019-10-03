@@ -10,6 +10,9 @@ import { Router } from './router';
 import { HomeCtrl } from './ctrl/home.ctrl';
 import { RepoCtrl } from './ctrl/repo.ctrl';
 import { UserCtrl } from './ctrl/user.ctrl';
+import { env } from './env';
+import { GithubApi } from './api/github.api';
+import { newHttp } from './api/http';
 
 const rootModule = angular.module('root', [
   'ngSanitize',
@@ -17,7 +20,10 @@ const rootModule = angular.module('root', [
   'ui.bootstrap',
 ]);
 rootModule
+  .constant('env', env)
+  .constant('http', newHttp(fetch))
   .config(Router)
+  .factory('githubApi', GithubApi)
   .controller('rootCtrl', RootCtrl)
   .controller('homeCtrl', HomeCtrl)
   .controller('userCtrl', UserCtrl)

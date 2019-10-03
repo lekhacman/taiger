@@ -4,7 +4,7 @@
   "author": "andrew <khacmanle@gmail.com>",
   "scripts": {
     "start": "parcel src/public/index.html",
-    "pretest": "eslint .",
+    "pretest": "eslint src",
     "test": "jest",
     "fix": "eslint --fix src"
   },
@@ -12,6 +12,12 @@
     "src"
   ],
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
     "@types/angular": "^1.6.56",
     "@types/angular-ui-bootstrap": "^1.0.0",
     "@types/angular-ui-router": "^1.1.40",
@@ -55,6 +61,7 @@
       "browser": true
     },
     "rules": {
+      "capitalized-comments": "off",
       "prettier/prettier": [
         "error",
         {
@@ -68,7 +75,18 @@
     ]
   },
   "jest": {
-    "testEnvironment": "node"
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-modules-commonjs",
+      "@babel/plugin-transform-runtime"
+    ]
   },
   "dependencies": {
     "angular": "^1.7.8",

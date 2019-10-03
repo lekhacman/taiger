@@ -7,6 +7,13 @@
   <link rel="icon" sizes="32x32" type="image/png" href="favicon.png">
 </head>
 <body ng-controller="rootCtrl">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a ui-sref="home">Home</a>
+      </li>
+    </ol>
+  </nav>
   <div class="container">
     <ui-view></ui-view>
   </div>

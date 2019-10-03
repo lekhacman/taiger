@@ -1,3 +1,3 @@
 export function RootCtrl() {}
 
-RootCtrl.$inject = [];
+RootCtrl.$inject = ['$scope', '$state'];
