@@ -5,7 +5,11 @@ export function GithubApi(env, http) {
   const githubEnv = R.path(['vendor', 'github'], env);
   return {
     user: UserApi({ url: `${githubEnv.url}/users`, http }),
-    markdown: Markdown({ url: `${githubEnv.url}/markdown`, http }),
+    markdown: Markdown({
+      url: `${githubEnv.url}/markdown`,
+      contentUrl: githubEnv.content,
+      http,
+    }),
   };
 }
 
@@ -19,13 +23,16 @@ function UserApi({ url, http }) {
   }
 }
 
-function Markdown({ url, http }) {
+function Markdown({ url, contentUrl, http }) {
   return { getReadme, render };
 
   function getReadme(repoPath) {
     return http
-      .fetch(`https://raw.githubusercontent.com/${repoPath}/master/README.md`)
-      .then(toText);
+      .fetch(`${contentUrl}/${repoPath}/master/README.md`)
+      .then(
+        R.ifElse(R.prop('ok'), toText, R.always('Repo has no readme.md')),
+        R.always('Error fetching readme.md liao!')
+      );
   }
 
   function render(text) {
@@ -39,7 +46,7 @@ function Markdown({ url, http }) {
         redirect: 'follow',
         body: JSON.stringify({ text }),
       })
-      .then(toText);
+      .then(toText, R.always('Render service unavailable at the moment!'));
   }
 
   function toText(res) {

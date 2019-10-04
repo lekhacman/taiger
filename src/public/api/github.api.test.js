@@ -15,7 +15,11 @@ describe('Github API', function() {
       POST: 'POST',
     };
     githubApi = GithubApi(
-      { vendor: { github: { url: 'http://localhost' } } },
+      {
+        vendor: {
+          github: { url: 'http://localhost', content: 'http://localhost' },
+        },
+      },
       http
     );
   });
@@ -35,7 +39,11 @@ describe('Github API', function() {
     test('getReadme', async function() {
       expect.assertions(2);
       const readme = '# nand2teris';
-      http.fetch.mockReturnValueOnce(Promise.resolve(readme));
+      const response = {
+        text: jest.fn().mockReturnValueOnce(readme),
+        ok: true,
+      };
+      http.fetch.mockReturnValueOnce(Promise.resolve(response));
 
       const res = await githubApi.markdown.getReadme('lekhacman/nand2teris');
       expect(http.fetch).toHaveBeenCalledTimes(1);
@@ -46,7 +54,8 @@ describe('Github API', function() {
       expect.assertions(2);
       const readme = '# nand2teris';
       const html = '<p><h1>nand2teris</h1></p>';
-      http.fetch.mockReturnValueOnce(Promise.resolve(html));
+      const response = { text: jest.fn().mockReturnValueOnce(html), ok: true };
+      http.fetch.mockReturnValueOnce(Promise.resolve(response));
 
       const res = await githubApi.markdown.render(readme);
       expect(http.fetch).toHaveBeenCalledTimes(1);
