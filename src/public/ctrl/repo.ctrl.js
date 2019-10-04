@@ -1,5 +1,4 @@
-export function RepoCtrl($scope) {
-  $scope.a = () => {};
+RepoCtrl.$inject = ['$scope', '$stateParams'];
+export function RepoCtrl($scope, $stateParams) {
+  $scope.name = $stateParams.repo;
 }
-
-RepoCtrl.$inject = ['$scope'];

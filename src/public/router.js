@@ -1,3 +1,5 @@
+import { ReposResolver } from './resolvers/repos.resolver';
+
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 export function Router($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -12,10 +14,13 @@ export function Router($stateProvider, $urlRouterProvider) {
       url: '/:username',
       template: require('./templates/user.html'),
       controller: 'userCtrl',
+      resolve: {
+        repos: ReposResolver,
+      },
     })
     .state({
       name: 'user.repo',
-      url: '^/:repo',
+      url: '/:repo',
       template: require('./templates/repo.html'),
       controller: 'repoCtrl',
     });
