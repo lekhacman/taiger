@@ -9,7 +9,11 @@ describe('Github API', function() {
     http = R.reduce((api, method) => R.assoc(method, jest.fn(), api), {}, [
       'get',
       'post',
+      'fetch',
     ]);
+    http.METHOD = {
+      POST: 'POST',
+    };
     githubApi = GithubApi(
       { vendor: { github: { url: 'http://localhost' } } },
       http
@@ -24,6 +28,29 @@ describe('Github API', function() {
       const res = await githubApi.user.getRepos('lekhacman');
       expect(http.get).toHaveBeenCalledTimes(1);
       expect(res).toEqual({});
+    });
+  });
+
+  describe('Markdown API', function() {
+    test('getReadme', async function() {
+      expect.assertions(2);
+      const readme = '# nand2teris';
+      http.fetch.mockReturnValueOnce(Promise.resolve(readme));
+
+      const res = await githubApi.markdown.getReadme('lekhacman/nand2teris');
+      expect(http.fetch).toHaveBeenCalledTimes(1);
+      expect(res).toEqual(readme);
+    });
+
+    test('render', async function() {
+      expect.assertions(2);
+      const readme = '# nand2teris';
+      const html = '<p><h1>nand2teris</h1></p>';
+      http.fetch.mockReturnValueOnce(Promise.resolve(html));
+
+      const res = await githubApi.markdown.render(readme);
+      expect(http.fetch).toHaveBeenCalledTimes(1);
+      expect(res).toEqual(html);
     });
   });
 });

@@ -1,4 +1,5 @@
 import { ReposResolver } from './resolvers/repos.resolver';
+import { ReadmeResolver } from './resolvers/readme.resolver';
 
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 export function Router($stateProvider, $urlRouterProvider) {
@@ -23,6 +24,9 @@ export function Router($stateProvider, $urlRouterProvider) {
       url: '/:repo',
       template: require('./templates/repo.html'),
       controller: 'repoCtrl',
+      resolve: {
+        readme: ReadmeResolver,
+      },
     });
   $urlRouterProvider.otherwise('/');
 }

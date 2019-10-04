@@ -21,7 +21,7 @@ const rootModule = angular.module('root', [
 ]);
 rootModule
   .constant('env', env)
-  .constant('http', newHttp(fetch))
+  .constant('http', newHttp(fetch, window))
   .config(Router)
   .factory('githubApi', GithubApi)
   .controller('rootCtrl', RootCtrl)

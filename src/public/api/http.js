@@ -1,9 +1,17 @@
-// import * as R from 'ramda';
+import * as R from 'ramda';
 
-export function newHttp(_fetch) {
+export function newHttp(_fetch, _window) {
+  const METHOD = R.compose(
+    Object.freeze,
+    R.fromPairs,
+    R.map(method => [method, method])
+  )(['GET', 'POST']);
+
   return {
     get,
     post,
+    fetch: _fetch.bind(_window),
+    METHOD,
   };
 
   function get(url) {
@@ -12,7 +20,7 @@ export function newHttp(_fetch) {
 
   function post(url, data) {
     return _fetch(url, {
-      method: 'POST',
+      method: METHOD.POST,
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
