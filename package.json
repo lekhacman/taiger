@@ -2,11 +2,13 @@
   "name": "taiger",
   "version": "1.0.0",
   "author": "andrew <khacmanle@gmail.com>",
+  "homepage": "http://lekhacman-taiger.s3-website-ap-southeast-1.amazonaws.com",
   "scripts": {
     "start": "parcel src/public/index.html",
     "pretest": "eslint src",
     "test": "jest --coverage",
-    "fix": "eslint --fix src"
+    "fix": "eslint --fix src",
+    "build": "parcel build src/public/index.html"
   },
   "files": [
     "src"
