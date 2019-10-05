@@ -46,3 +46,7 @@ npm run build
 
 App is deployed and can be access via [http://lekhacman-taiger.s3-website-ap-southeast-1.amazonaws.com](http://lekhacman-taiger.s3-website-ap-southeast-1.amazonaws.com)
 
+#### Question 2
+
+Implementation can be found under `src/royal.js`
+
