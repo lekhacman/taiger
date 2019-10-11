@@ -1,7 +1,6 @@
 ReadmeResolver.$inject = ['githubApi', '$stateParams'];
 export function ReadmeResolver(githubApi, $stateParams) {
   const { username, repo } = $stateParams;
-  return githubApi.markdown
-    .getReadme(`${username}/${repo}`)
-    .then(githubApi.markdown.render);
+  const { getReadme, render } = githubApi.markdown;
+  return getReadme(`${username}/${repo}`).then(render);
 }
