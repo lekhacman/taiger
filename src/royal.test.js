@@ -9,7 +9,7 @@ describe('Royal Rumble', function() {
   ];
 
   cases.forEach((c, id) => {
-    test(`#${id} getSortedList`, function() {
+    test(`#${id} should sort king list`, function() {
       expect(getSortedList(c.input)).toEqual(c.output);
     });
   });
@@ -68,7 +68,7 @@ describe('Roman parser', function() {
   ];
 
   cases.forEach((c, id) => {
-    test(`#${id} getSortedList`, function() {
+    test(`#${id} should parse Roman chars to integer`, function() {
       expect(toInteger(c.input)).toEqual(c.output);
     });
   });
