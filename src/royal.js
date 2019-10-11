@@ -51,11 +51,12 @@ export function toInteger(romanChars) {
         R.ifElse(
           R.compose(
             R.flip(R.has)(ROMAN.SINGLE),
-            R.concat(char)
+            R.concat(char),
+            R.view(singleLens)
           ),
-          R.always(R.over(singleLens, R.concat(char), acc)),
-          R.always(R.over(doubleLens, R.concat(char), acc))
-        )(R.view(singleLens, acc)),
+          R.over(singleLens, R.concat(char)),
+          R.over(doubleLens, R.concat(char))
+        )(acc),
       ['', '']
     ),
     R.map(
